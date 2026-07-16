@@ -18,7 +18,10 @@ A schema-driven, autonomous workflow engine that:
 7. Validates extracted fields against the schema's required fields
 8. Calculates a confidence score
 9. Decides: Approve / Retry OCR / Ask User / Escalate to Human Review
-10. Persists full state + audit trail (SQLite + JSON logs)
+10. If "Ask User" is decided, allows the user to supply the missing
+    field(s) via the frontend and re-validates without re-running
+    OCR/extraction
+11. Persists full state + audit trail (SQLite + JSON logs)
 
 ## Tech Stack
 
