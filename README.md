@@ -4,11 +4,6 @@ An autonomous AI worker that owns an entire document-processing business
 workflow — from image upload to a final Approve / Retry / Ask-User /
 Escalate decision — rather than a single LLM call wrapped in an API.
 
-## What this is NOT
-- Not a chatbot
-- Not an OCR demo
-- Not a document Q&A tool
-
 ## What this IS
 
 A schema-driven, autonomous workflow engine that:
@@ -122,10 +117,4 @@ Reference & examples:
 - [`docs/INPUT_OUTPUT_EXAMPLES.md`](docs/INPUT_OUTPUT_EXAMPLES.md) — real request/response examples
 - [`docs/FUTURE_IMPROVEMENTS.md`](docs/FUTURE_IMPROVEMENTS.md) — known limitations and next steps
 
-## Known Limitation
-
-EasyOCR performs well on simple, single-column forms but has reduced
-accuracy on dense, multi-column documents (e.g. resumes with small
-fonts and icons). This is documented, not hidden — see
-`docs/FUTURE_IMPROVEMENTS.md` for the planned fix (TrOCR / cloud OCR
-fallback / image preprocessing).
+Developed by Shikha Sahu
