@@ -1,0 +1,14 @@
+{
+  "document_type": "employee_onboarding",
+  "description": "A new employee onboarding form capturing joining details.",
+  "required_fields": ["name", "employee_id", "joining_date", "department"],
+  "optional_fields": ["email", "phone", "manager_name"],
+  "validation_rules": {
+    "name": { "type": "string" },
+    "employee_id": { "type": "string" },
+    "joining_date": { "type": "date" },
+    "department": { "type": "string" },
+    "email": { "type": "email" },
+    "phone": { "type": "phone" }
+  }
+}

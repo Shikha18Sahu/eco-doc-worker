@@ -1,0 +1,14 @@
+{
+  "document_type": "student_admission",
+  "description": "A student admission form for enrolling into a course.",
+  "required_fields": ["name", "date_of_birth", "course", "admission_id"],
+  "optional_fields": ["email", "phone", "guardian_name"],
+  "validation_rules": {
+    "name": { "type": "string" },
+    "date_of_birth": { "type": "date" },
+    "course": { "type": "string" },
+    "admission_id": { "type": "string" },
+    "email": { "type": "email" },
+    "phone": { "type": "phone" }
+  }
+}

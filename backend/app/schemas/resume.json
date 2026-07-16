@@ -1,0 +1,11 @@
+{
+  "document_type": "resume",
+  "description": "A candidate's resume or CV containing contact and professional details.",
+  "required_fields": ["name", "email", "phone"],
+  "optional_fields": ["skills", "education", "experience", "linkedin"],
+  "validation_rules": {
+    "name": { "type": "string" },
+    "email": { "type": "email" },
+    "phone": { "type": "phone" }
+  }
+}

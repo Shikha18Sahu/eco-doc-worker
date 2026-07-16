@@ -1,0 +1,14 @@
+{
+  "document_type": "kyc",
+  "description": "A Know Your Customer form used for identity verification.",
+  "required_fields": ["name", "id_number", "date_of_birth", "address"],
+  "optional_fields": ["phone", "email"],
+  "validation_rules": {
+    "name": { "type": "string" },
+    "id_number": { "type": "string" },
+    "date_of_birth": { "type": "date" },
+    "address": { "type": "string" },
+    "phone": { "type": "phone" },
+    "email": { "type": "email" }
+  }
+}

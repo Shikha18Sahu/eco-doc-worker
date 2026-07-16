@@ -1,0 +1,42 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY backend/requirements.txt .
+
+# Install matching CPU-only torch + torchvision pair FIRST.
+RUN pip install --no-cache-dir \
+    torch==2.4.1 torchvision==0.19.1 \
+    --index-url https://download.pytorch.org/whl/cpu
+
+# Install easyocr WITHOUT letting it pull its own torch/torchvision —
+# --no-deps prevents it from overriding our CPU-only versions.
+RUN pip install --no-cache-dir --no-deps easyocr==1.7.2
+
+# Manually install easyocr's OTHER dependencies (everything except
+# torch/torchvision, which we already installed above).
+RUN pip install --no-cache-dir \
+    opencv-python-headless \
+    scipy \
+    scikit-image \
+    python-bidi \
+    PyYAML \
+    Shapely \
+    pyclipper \
+    ninja \
+    numpy
+
+# Now install the rest of the app's requirements
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY backend/app ./app
+COPY data ./data
+
+EXPOSE 8000
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
