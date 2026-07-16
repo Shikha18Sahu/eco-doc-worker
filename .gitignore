@@ -38,3 +38,14 @@ build/
 data/logs/
 data/uploads/
 data/*.db
+
+# IDE (agar kabhi PyCharm use kiya ho)
+.idea/
+
+# Python packaging leftovers
+*.egg-info/
+.eggs/
+
+# Coverage reports (agar tests likhe ho kabhi)
+htmlcov/
+.coverage

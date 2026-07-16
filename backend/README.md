@@ -84,3 +84,5 @@ details on how this works.
 - `CLAW.md` — the Harness layer and its relationship to OpenClaw/Hermes concepts
 - `STATE.md` — the WorkflowState object and how state flows
 - `ARCHITECTURE.md` — full system architecture and diagrams
+
+

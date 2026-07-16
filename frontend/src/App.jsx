@@ -22,6 +22,7 @@ function App() {
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [editedFields, setEditedFields] = useState({});
 
   const startWorkflow = async () => {
     if (!file) {
@@ -30,6 +31,7 @@ function App() {
     }
     setLoading(true);
     setResult(null);
+    setEditedFields({});
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -47,10 +49,32 @@ function App() {
     }
   };
 
+  const resumeWorkflow = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/workflow/${result.workflow_id}/resume`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ additional_fields: editedFields }),
+      });
+      const data = await res.json();
+      setResult(data);
+      setEditedFields({});
+    } catch (err) {
+      setResult({ error: String(err) });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const documentType = result?.structured_data?._document_type;
   const visibleFields = result?.structured_data
     ? Object.entries(result.structured_data).filter(([k]) => !k.startsWith("_"))
     : [];
+
+  const missingFieldNames = visibleFields
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
@@ -124,6 +148,32 @@ function App() {
                   <li key={i}>{err}</li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {result.next_action === "ask_user" && missingFieldNames.length > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded p-3 space-y-2">
+              <h3 className="text-sm font-semibold text-blue-700">
+                Please provide the missing information
+              </h3>
+              {missingFieldNames.map((field) => (
+                <input
+                  key={field}
+                  placeholder={field.replace(/_/g, " ")}
+                  className="border rounded px-2 py-1 w-full text-sm"
+                  value={editedFields[field] || ""}
+                  onChange={(e) =>
+                    setEditedFields({ ...editedFields, [field]: e.target.value })
+                  }
+                />
+              ))}
+              <button
+                className="bg-blue-600 text-white px-3 py-1 rounded text-sm disabled:opacity-50 w-full"
+                onClick={resumeWorkflow}
+                disabled={loading}
+              >
+                {loading ? "Submitting..." : "Submit and Re-check"}
+              </button>
             </div>
           )}
 
