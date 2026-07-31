@@ -67,6 +67,7 @@ uvicorn app.main:app --reload
 cd frontend
 npm install
 npm run dev
+
 ```
 
 Backend runs at `http://127.0.0.1:8000`, frontend at `http://localhost:5173`.
