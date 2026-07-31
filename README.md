@@ -1,8 +1,8 @@
 # Autonomous AI Document Processing Worker
 
 An autonomous AI worker that owns an entire document-processing business
-workflow — from image upload to a final Approve / Retry / Ask-User /
-Escalate decision — rather than a single LLM call wrapped in an API.
+workflow — from scanned/handwritten image upload to a final Approve / Retry / Ask-User /
+Escalate decision rather than a single LLM call wrapped in an API.
 
 ## What this IS
 
