@@ -56,8 +56,8 @@ data/
 **Backend:**
 ```bash
 cd backend
-python -m venv venv
-venv\Scripts\activate        # Windows
+py -3.11 -m venv venv
+.\venv\Scripts\Activate.ps1      # Windows
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```

@@ -1,0 +1,17 @@
+{
+  "name": "day04",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/genai": "^1.11.0",
+    "openai": "^5.10.2",
+    "readline-sync": "^1.4.10"
+  }
+}
