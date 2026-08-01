@@ -1,4 +1,4 @@
-# Autonomous AI Document Processing Worker
+# DocSense: Autonomous AI Document Processing Worker
 
 An autonomous AI worker that owns an entire document-processing business
 workflow — from scanned/handwritten image upload to a final Approve / Retry / Ask-User /
