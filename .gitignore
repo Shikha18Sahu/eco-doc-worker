@@ -5,6 +5,8 @@ __pycache__/
 *.pyd
 
 # Virtual Environment
+venv/
+backend/venv/
 .venv/
 backend/.venv/
 
