@@ -97,7 +97,6 @@ class DecisionAgent:
 
             if UNKNOWN_TYPE_MESSAGE not in state.validation_errors:
                 state.validation_errors.append(UNKNOWN_TYPE_MESSAGE)
-
             state.next_action = decision
 
             duration_ms = (time.perf_counter() - start) * 1000
@@ -112,6 +111,25 @@ class DecisionAgent:
 
         # --- Normal decision logic for known, schema-matched documents ---
         confidence = state.confidence or 0.0
+        image_quality_error = any(
+            "Image quality insufficient" in err for err in state.validation_errors
+        )
+
+        if image_quality_error:
+            decision = NextAction.ESCALATE
+            state.human_review_required = True
+            state.status = WorkflowStatus.ESCALATED
+            state.next_action = decision
+
+            duration_ms = (time.perf_counter() - start) * 1000
+            state.add_history(HistoryEntry(
+                agent=self.name,
+                input_summary=f"confidence={state.confidence}, image_quality_error=True",
+                output_summary="Escalated due to insufficient image quality — please re-upload a clearer image",
+                decision=decision.value,
+                duration_ms=duration_ms,
+            ))
+            return state
         has_errors = len(state.validation_errors) > 0
 
         if has_errors and confidence < CONFIDENCE_ASK_USER_THRESHOLD:

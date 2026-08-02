@@ -5,8 +5,8 @@ import cv2
 from app.state.workflow_state import WorkflowState, WorkflowStatus, HistoryEntry
 
 BLUR_THRESHOLD = 100.0  # Laplacian variance below this = too blurry
-MIN_WIDTH = 300
-MIN_HEIGHT = 300
+MIN_WIDTH = 250
+MIN_HEIGHT = 250
 
 
 class ImageQualityAgent:
